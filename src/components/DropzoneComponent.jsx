@@ -38,12 +38,7 @@ const rejectStyle = {
 
 function DropzoneComponent(props) {
   const [files, setFiles] = useState([]);
-  const [fileLinks, setFilelinks] = useState([
-    "https://wvw.report/NMqt-20240421-135049_wvw",
-    "https://wvw.report/94Ui-20240421-140038_wvw",
-    "https://wvw.report/NMqt-20240421-135049_wvw",
-    "https://wvw.report/94Ui-20240421-140038_wvw",
-  ]);
+  const [fileLinks, setFilelinks] = useState([]);
   const [fileLocation, setFileLocation] = useState();
   const [parsedFile, setParsedFile] = useState();
   const [isLoadingLinks, setIsLoadingLinks] = useState();
