@@ -136,7 +136,7 @@ function DropzoneComponent(props) {
   const handleUploadBtnClick = async () => {
     console.log("file links", fileLinks);
     setIsLoadingFile(true);
-    const url = config["PARSER_URL"] + "/json";
+    const url = config["PARSER_URL"] + "/server/gwlogparser/json";
     const data = { links: [] };
     const headers = { "Content-Type": "application/json" };
     fileLinks.forEach((link) => {
