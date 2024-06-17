@@ -42,5 +42,8 @@
   },
   "devDependencies": {
     "gh-pages": "^6.1.1"
+  },
+  "browser": {
+    "fs": false
   }
 }
