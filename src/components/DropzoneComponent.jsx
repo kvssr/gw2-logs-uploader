@@ -275,6 +275,13 @@ function DropzoneComponent(props) {
         className="upload-thumb"
       >
         {file}
+        {files[file]["status"] === "loading" && (
+          <Circles
+            width={20}
+            height={20}
+            marginLeft={20}
+          />
+        )}
       </div>
     ));
   };
@@ -288,14 +295,7 @@ function DropzoneComponent(props) {
     }
     return filelinks.map((file) => {
       if (file === "loading") {
-        return (
-          <div>
-            <Circles
-              width={20}
-              height={20}
-            />
-          </div>
-        );
+        return "";
       } else if (file === "failed") {
         return <div>Failed...</div>;
       } else {
@@ -317,21 +317,6 @@ function DropzoneComponent(props) {
       }
     });
   };
-
-  const thumbsLinks = fileLinks.map((file) => (
-    <div
-      key={file + Math.floor(Math.random() * 100)}
-      className="upload-thumb"
-    >
-      <a
-        href={file}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {file}
-      </a>
-    </div>
-  ));
 
   const ParsedInfo = () => {
     if (!parsedFile) return "";
