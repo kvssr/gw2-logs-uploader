@@ -72,6 +72,11 @@ a:hover {
 .upload-thumb {
   width: max-content;
   margin-bottom: 10px;
+  display: flex;
+}
+
+.uploadThumbCell {
+  padding: 5px;
 }
 
 .resultContainer {
@@ -79,9 +84,7 @@ a:hover {
   justify-content: space-between;
 }
 
-.resultColumn {
-  width: 50%;
-}
+.resultColumn {}
 
 .parsedContainer {
   padding: 20px 0px;

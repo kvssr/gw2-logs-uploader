@@ -274,14 +274,24 @@ function DropzoneComponent(props) {
         key={file.name}
         className="upload-thumb"
       >
-        {file}
-        {files[file]["status"] === "loading" && (
-          <Circles
-            width={20}
-            height={20}
-            marginLeft={20}
-          />
-        )}
+        <div className="uploadThumbCell">{file}</div>
+        <div className="uploadThumbCell">
+          {files[file]["status"] === "loading" ? (
+            <Circles
+              width={20}
+              height={20}
+              marginLeft={20}
+            />
+          ) : (
+            <a
+              href={files[file]["link"]}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {files[file]["link"]}
+            </a>
+          )}
+        </div>
       </div>
     ));
   };
@@ -364,10 +374,10 @@ function DropzoneComponent(props) {
           {/* {thumbs} */}
           <Thumbs />
         </aside>
-        <aside className="resultColumn">
+        {/* <aside className="resultColumn">
           <h2>Links</h2>
           <ThumbsLinks />
-        </aside>
+        </aside> */}
       </div>
       <div className="parsedContainer">
         <div className="postParsedRow">
