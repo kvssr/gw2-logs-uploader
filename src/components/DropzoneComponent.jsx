@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { useDropzone } from "react-dropzone";
 import config from "./../config.json";
-import { Circles } from "react-loading-icons";
+import Oval from "react-loading-icons/dist/esm/components/oval";
 
 const baseStyle = {
   display: "flex",
@@ -19,6 +19,11 @@ const baseStyle = {
   borderStyle: "dashed",
   transition: "border .3s ease-in-out",
   marginBottom: 20,
+};
+
+const circleColour = {
+  a: "#03ca00",
+  b: "#ffa421",
 };
 
 const activeStyle = {
@@ -104,10 +109,13 @@ function DropzoneComponent(props) {
   useEffect(() => {
     for (let key in files) {
       if (files[key]["status"] === "waiting") {
+        files[key]["server"] = "a";
         uploadFile(files[key]["file"], key);
         files[key]["status"] = "loading";
         setFiles({ ...files });
       } else if (files[key]["status"] === "failed") {
+        if (files[key]["server"] === "b") return;
+        files[key]["server"] = "b";
         uploadFile(files[key]["file"], key, "b.");
         files[key]["status"] = "loading";
         setFiles({ ...files });
@@ -159,7 +167,7 @@ function DropzoneComponent(props) {
       })
       .catch((error) => {
         console.log("Catch error", error);
-        updateLinkStatus(name, "failed");
+        updateLinkStatus(name, `failed`);
       });
   };
 
@@ -277,10 +285,11 @@ function DropzoneComponent(props) {
         <div className="uploadThumbCell">{file}</div>
         <div className="uploadThumbCell">
           {files[file]["status"] === "loading" ? (
-            <Circles
+            <Oval
               width={20}
               height={20}
               marginLeft={20}
+              stroke={circleColour[files[file]["server"]]}
             />
           ) : (
             <a
@@ -291,6 +300,8 @@ function DropzoneComponent(props) {
               {files[file]["link"]}
             </a>
           )}
+          {files[file]["status"] === "failed" &&
+            files[file]["server"] === "b" && <div>File is too big.</div>}
         </div>
       </div>
     ));
@@ -371,7 +382,6 @@ function DropzoneComponent(props) {
       <div className="resultContainer">
         <aside className="resultColumn">
           <h2>Files</h2>
-          {/* {thumbs} */}
           <Thumbs />
         </aside>
         {/* <aside className="resultColumn">
@@ -383,7 +393,7 @@ function DropzoneComponent(props) {
         <div className="postParsedRow">
           <div className="parsedInfo">
             {isLoadingFile && (
-              <Circles
+              <Oval
                 width={20}
                 height={20}
               />
@@ -406,7 +416,7 @@ function DropzoneComponent(props) {
           </div>
           <div className="dbContainer">
             {databaseId === "loading" && (
-              <Circles
+              <Oval
                 width={20}
                 height={20}
               />
